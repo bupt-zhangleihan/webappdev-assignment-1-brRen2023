@@ -1,0 +1,59 @@
+AnmPlayer.createSvgFilterElement = function(R, G, B, A, RO, GO, BO) {
+    var NS = "http://www.w3.org/2000/svg";
+    if (AnmPlayer.svgRoot == undefined) {
+        AnmPlayer.svgRoot = document.createElementNS(NS, "svg");       
+        AnmPlayer.svgRoot.setAttribute("style", "display:none");
+        document.body.appendChild(AnmPlayer.svgRoot);                   
+    }
+    var filter = document.createElementNS(NS, "filter");
+    var id = "AnmPlayerSvgFilter_" + (AnmPlayer.svgfilter_incrid++);
+    filter.setAttribute("id", id);
+    var colormat = document.createElementNS(NS, "feColorMatrix");
+    colormat.setAttribute("in", "SourceGraphic");
+    colormat.setAttribute("type", "matrix");
+    colormat.setAttribute("color-interpolation-filters", "sRGB");
+    var mat = "";
+    mat += R + " 0 0 0 " + RO + "\n";
+    mat += "0 " + G + " 0 0 " + GO + "\n";
+    mat += "0 0 " + B + " 0 " + BO + "\n";
+    mat += "0 0 0 " + A + " 0";
+    colormat.setAttribute("values", mat);
+    filter.appendChild(colormat);
+    AnmPlayer.svgRoot.appendChild(filter);
+    return id;
+}
+
+
+这段代码是 JavaScript 代码，用于在 HTML 中创建一个 SVG 滤镜元素。具体来说，它定义了一个名为 AnmPlayer.createSvgFilterElement 的函数，该函数接受七个参数：R、G、B、A、RO、GO 和 BO。
+
+首先，该函数创建了一个名为 NS 的变量，并将其设置为 http://www.w3.org/2000/svg，这是 SVG 命名空间的标识符。然后，它检查 AnmPlayer.svgRoot 是否已经定义。如果未定义，则创建一个新的 <svg> 元素，并将其附加到文档主体中。这个 <svg> 元素被设置为不可见，因为它只用于创建滤镜元素。
+
+接下来，该函数创建一个名为 filter 的新的 <filter> 元素，并为其设置一个唯一的 ID。然后，它创建一个名为 colormat 的新的 <feColorMatrix> 元素，并为其设置输入（in）属性为 SourceGraphic，并将其类型（type）设置为矩阵（matrix）。接着，它将颜色插值滤镜（color-interpolation-filters）设置为 sRGB，并将矩阵的值设置为一个字符串，其中包含各种颜色和偏移量的值。最后，它将 colormat 添加到 filter 中，并将 filter 添加到 AnmPlayer.svgRoot 中。最后，该函数返回新创建的滤镜元素的 ID。
+
+总体来说，这段代码用于创建一个 SVG 滤镜元素，该元素可以在 SVG 图像中使用，以改变图像的颜色和透明度。
+
+当我们在 JavaScript 中创建或修改 HTML 元素时，我们通常会使用 DOM 接口。在上述代码中，涉及到了以下 DOM 接口：
+
+1. `document.createElementNS(NS, "svg")`：创建一个新的 SVG 元素，并将其命名空间设置为 `http://www.w3.org/2000/svg`。
+
+2. `AnmPlayer.svgRoot.setAttribute("style", "display:none")`：设置 `AnmPlayer.svgRoot` 元素的样式属性，使其不可见。
+
+3. `document.body.appendChild(AnmPlayer.svgRoot)`：将 `AnmPlayer.svgRoot` 元素添加到文档主体中。
+
+4. `document.createElementNS(NS, "filter")`：创建一个新的 `<filter>` 元素，并将其命名空间设置为 `http://www.w3.org/2000/svg`。
+
+5. `filter.setAttribute("id", id)`：将 `filter` 元素的 ID 属性设置为 `id`。
+
+6. `document.createElementNS(NS, "feColorMatrix")`：创建一个新的 `<feColorMatrix>` 元素，并将其命名空间设置为 `http://www.w3.org/2000/svg`。
+
+7. `colormat.setAttribute("in", "SourceGraphic")`：将 `colormat` 元素的输入（in）属性设置为 `SourceGraphic`。
+
+8. `colormat.setAttribute("type", "matrix")`：将 `colormat` 元素的类型（type）属性设置为矩阵（matrix）。
+
+9. `colormat.setAttribute("color-interpolation-filters", "sRGB")`：将 `colormat` 元素的颜色插值滤镜（color-interpolation-filters）属性设置为 sRGB。
+
+10. `colormat.setAttribute("values", mat)`：将 `colormat` 元素的矩阵值（values）属性设置为 `mat`。
+
+11. `filter.appendChild(colormat)`：将 `colormat` 元素添加到 `filter` 元素中。
+
+12. `AnmPlayer.svgRoot.appendChild(filter)`：将 `filter` 元素添加到 `AnmPlayer.svgRoot`
